@@ -16,7 +16,12 @@ from lbshield.detection.dos_detector import MultiSignalGate
 from lbshield.detection.http_detector import http_signatures
 from lbshield.detection.network_detector import network_signatures
 from lbshield.detection.process_detector import process_events
-from lbshield.detection.resource_detector import SustainedThreshold, cpu_event, disk_events, memory_event
+from lbshield.detection.resource_detector import (
+    SustainedThreshold,
+    cpu_event,
+    disk_events,
+    memory_event,
+)
 from lbshield.incidents.manager import IncidentManager
 from lbshield.models import Event, Severity
 from lbshield.monitors.auth import scan_auth_logs
