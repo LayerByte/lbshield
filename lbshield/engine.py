@@ -155,6 +155,6 @@ class LBShieldEngine:
             try:
                 self.sample_once()
             except Exception as exc:  # pragma: no cover - runtime isolation
-                LOGGER.exception("monitoring iteration failed: %s", exc)
+                LOGGER.exception("monitoring iteration failed: %s", exc) # noqa: TRY401
             elapsed = time.monotonic() - started
             time.sleep(max(0.1, self.config.monitor.interval_seconds - elapsed))
