@@ -51,8 +51,8 @@ def memory_event(value: float, warning: float, critical: float) -> Event | None:
 def disk_events(samples: list[object], warning: float, critical: float) -> list[Event]:
     events: list[Event] = []
     for sample in samples:
-        percent = float(getattr(sample, "percent"))
-        path = str(getattr(sample, "path"))
+        percent = float(sample.percent)
+        path = str(sample.path)
         if percent >= critical:
             severity = Severity.CRITICAL
         elif percent >= warning:

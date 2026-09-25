@@ -9,7 +9,6 @@ from typing import Any
 
 from lbshield.models import Event, Incident
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS metrics (
   id INTEGER PRIMARY KEY AUTOINCREMENT,

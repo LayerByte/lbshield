@@ -43,7 +43,7 @@ def _make_console() -> Console:
 console = _make_console()
 
 
-def _config(path: Optional[Path]) -> AppConfig:
+def _config(path: Path | None) -> AppConfig:
     return load_config(path)
 
 
@@ -54,7 +54,7 @@ def version() -> None:
 
 
 @app.command()
-def config_check(config: Optional[Path] = typer.Option(None, "--config", "-c")) -> None:
+def config_check(config: Path | None = typer.Option(None, "--config", "-c")) -> None:
     """Validate configuration."""
     cfg = _config(config)
     console.print("[green]Configuration valid[/green]")
@@ -62,7 +62,7 @@ def config_check(config: Optional[Path] = typer.Option(None, "--config", "-c")) 
 
 
 @app.command()
-def monitor(config: Optional[Path] = typer.Option(None, "--config", "-c")) -> None:
+def monitor(config: Path | None = typer.Option(None, "--config", "-c")) -> None:
     """Run the live dashboard."""
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
     cfg = _config(config)
@@ -96,7 +96,7 @@ def monitor(config: Optional[Path] = typer.Option(None, "--config", "-c")) -> No
 
 
 @app.command()
-def status(config: Optional[Path] = typer.Option(None, "--config", "-c")) -> None:
+def status(config: Path | None = typer.Option(None, "--config", "-c")) -> None:
     """Print a one-shot status snapshot."""
     engine = LBShieldEngine(_config(config))
     sample = engine.sample_once()
@@ -106,7 +106,7 @@ def status(config: Optional[Path] = typer.Option(None, "--config", "-c")) -> Non
 
 
 @app.command()
-def events(config: Optional[Path] = typer.Option(None, "--config", "-c")) -> None:
+def events(config: Path | None = typer.Option(None, "--config", "-c")) -> None:
     """Collect and print current events."""
     engine = LBShieldEngine(_config(config))
     sample = engine.sample_once()
@@ -148,7 +148,7 @@ def ports() -> None:
 
 
 @app.command()
-def services(config: Optional[Path] = typer.Option(None, "--config", "-c")) -> None:
+def services(config: Path | None = typer.Option(None, "--config", "-c")) -> None:
     """Show configured service states."""
     cfg = _config(config)
     table = Table("Service", "Active", "Status")
@@ -170,7 +170,7 @@ def incidents() -> None:
 
 
 @app.command()
-def test_alert(provider: str = typer.Argument("console"), config: Optional[Path] = typer.Option(None, "--config", "-c")) -> None:
+def test_alert(provider: str = typer.Argument("console"), config: Path | None = typer.Option(None, "--config", "-c")) -> None:
     """Send a test alert through the selected provider."""
     cfg = _config(config)
     if provider == "discord":

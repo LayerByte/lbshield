@@ -7,7 +7,11 @@ from dataclasses import dataclass, field
 
 from lbshield.alerts.console import ConsoleAlertProvider
 from lbshield.alerts.discord import DiscordAlertProvider
-from lbshield.alerts.formatter import discord_incident_text, standard_alert, telegram_incident_text
+from lbshield.alerts.formatter import (
+    discord_incident_text,
+    standard_alert,
+    telegram_incident_text,
+)
 from lbshield.alerts.telegram import TelegramAlertProvider
 from lbshield.config import AppConfig
 from lbshield.models import Event, Incident

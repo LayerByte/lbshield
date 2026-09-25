@@ -9,7 +9,12 @@ from lbshield.models import Event, ServerMetadata
 from lbshield.ui.banner import banner
 from lbshield.ui.components import status_panel
 from lbshield.ui.tables import events_table, key_value_table
-from lbshield.utils.formatting import format_bps, format_bytes_per_second, format_percent, format_pps
+from lbshield.utils.formatting import (
+    format_bps,
+    format_bytes_per_second,
+    format_percent,
+    format_pps,
+)
 
 
 def dashboard(
