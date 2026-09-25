@@ -1,4 +1,4 @@
-name: Python Lint
+name: Python Lint & Auto-PR
 
 on:
   push:
@@ -7,11 +7,12 @@ on:
     branches: [ main, master ]
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 jobs:
-  ruff:
-    name: runner / ruff-lint
+  ruff-fix:
+    name: runner / ruff-auto-fix
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -20,10 +21,22 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: Install Ruff
         run: pip install ruff
 
-      - name: Run Ruff Linter
-        run: ruff check .
+      - name: Run Ruff Linter with Auto-fix
+        run: ruff check . --fix
+
+      - name: Create Pull Request if there are fixes
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "style(ruff): auto-fix python linter issues"
+          title: "Automated Ruff Code Fixes"
+          body: |
+            This pull request was created automatically using the Ruff linter (`ruff check . --fix`).
+          branch: ruff-automated-fixes
+          base: main
+          signoff: false
