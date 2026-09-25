@@ -1,0 +1,74 @@
+server:
+  id: "LB-GAME-01"
+  name: "GAME-01"
+  public_ip: "auto"
+  hostname: "auto"
+  interface: "auto"
+
+monitor:
+  interval_seconds: 2
+
+cpu:
+  warning: 80
+  critical: 95
+  minimum_duration: 30
+
+memory:
+  warning: 80
+  critical: 92
+
+disk:
+  warning: 80
+  critical: 90
+  paths:
+    - /
+    - /home
+    - /var
+
+network:
+  enabled: true
+  baseline: true
+
+network_detection:
+  minimum_duration: 5
+  minimum_signals: 2
+
+processes:
+  enabled: true
+  trusted_processes:
+    - systemd
+    - sshd
+    - nginx
+  trusted_paths:
+    - /usr/bin/
+    - /usr/sbin/
+
+ports:
+  enabled: true
+  expected:
+    - 22
+    - 80
+    - 443
+
+services:
+  enabled: true
+  monitor:
+    - ssh
+    - nginx
+  automatic_restart: false
+
+alerts:
+  cooldown_seconds: 300
+  reminder_seconds: 1800
+  console: true
+  discord: false
+  telegram: false
+
+discord:
+  format: "text"
+
+storage:
+  metrics_days: 7
+  events_days: 30
+  alert_days: 30
+

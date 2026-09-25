@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lbshield"
+version = "0.1.0"
+description = "Linux Server Security & DDoS Monitor"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "LBShield contributors" }]
+keywords = ["python", "linux-security", "server-monitoring", "ddos-detection", "blue-team"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: System Administrators",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Security",
+  "Topic :: System :: Monitoring",
+]
+dependencies = [
+  "httpx>=0.27",
+  "psutil>=5.9",
+  "pydantic>=2.7",
+  "PyYAML>=6.0",
+  "rich>=13.7",
+  "typer>=0.12",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.2"]
+
+[project.scripts]
+lbshield = "lbshield.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["lbshield*"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+

@@ -1,0 +1,22 @@
+[Unit]
+Description=LBShield Linux Server Security & DDoS Monitor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=lbshield
+Group=lbshield
+WorkingDirectory=/opt/lbshield
+EnvironmentFile=-/etc/lbshield/lbshield.env
+ExecStart=/opt/lbshield/.venv/bin/lbshield monitor --config /etc/lbshield/lbshield.yaml
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=read-only
+
+[Install]
+WantedBy=multi-user.target
+
